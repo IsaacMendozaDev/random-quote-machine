@@ -1,38 +1,23 @@
-import { useEffect, useState } from "react";
-import { fetchRandomQuoteFromAPI } from "./services/quotes";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
+import { RainbowBackground } from "./RainbowBackground";
+import { QuoteBox } from "./QuoteBox";
 
 function App() {
-  const [quote, setQuote] = useState("");
-  const [author, setAuthor] = useState("");
-
-  const tweetURL = `https://twitter.com/intent/tweet?hashtags=quotes&text=%22${quote}%22+${author}`;
-
-  useEffect(() => {
-    fetchRandomQuoteFromAPI().then(({ quote, author }) => {
-      setAuthor(author);
-      setQuote(quote);
-    });
-  }, []);
-
-  const handleClick = () => {
-    fetchRandomQuoteFromAPI().then(({ quote, author }) => {
-      setAuthor(author);
-      setQuote(quote);
-    });
-  };
-
   return (
-    <div id="quote-box">
-      <p id="text">{quote}</p>
-      <p id="author">{author}</p>
+    <>
+      <RainbowBackground />
 
-      <a id="tweet-quote" href={tweetURL} target="_top _blank">
-        Tweet
-      </a>
-      <button id="new-quote" onClick={handleClick}>
-        New Quote
-      </button>
-    </div>
+      <div
+        className="container d-flex justify-content-center align-items-center "
+        style={{
+          height: "100dvh",
+        }}
+      >
+        <QuoteBox />
+      </div>
+    </>
   );
 }
 

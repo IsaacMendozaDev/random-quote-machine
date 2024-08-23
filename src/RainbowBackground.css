@@ -1,0 +1,37 @@
+.rainbow-lava-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden; /* Esconde el exceso difuminado */
+  z-index: -1;
+}
+
+.rainbow-lava-background {
+  background: radial-gradient(circle at 20% 30%, #ff7f00, transparent),
+    radial-gradient(circle at 80% 70%, #9400d3, transparent),
+    radial-gradient(circle at 50% 50%, #00ff00, transparent),
+    radial-gradient(circle at 20% 70%, #0000ff, transparent),
+    radial-gradient(circle at 80% 30%, #ff0000, transparent);
+  background-size: 200% 200%;
+  animation: move-gradients 8s ease infinite;
+  filter: blur(60px);
+  width: 120dvw; /* Aumenta el tamaño para cubrir más */
+  height: 120dvh;
+  position: absolute;
+  top: -10%; /* Ajusta la posición si es necesario */
+  left: -10%;
+}
+
+@keyframes move-gradients {
+  0% {
+    background-position: 0% 0%, 50% 50%, 100% 100%;
+  }
+  50% {
+    background-position: 100% 100%, 0% 0%, 50% 50%;
+  }
+  100% {
+    background-position: 0% 0%, 50% 50%, 100% 100%;
+  }
+}
