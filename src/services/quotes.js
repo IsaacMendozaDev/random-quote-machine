@@ -1,5 +1,5 @@
-const QUOTE_ENDPOINT_OBJECT = "https://api.api-ninjas.com/v1/quotes";
-const API_KEY = "hmeNROnLb+thKNk1dQn1VA==ugX8fto3ykCJVn7w";
+const QUOTE_ENDPOINT_OBJECT = import.meta.env.VITE_API_URL;
+const API_KEY = import.meta.env.VITE_API_QUOTE_KEY;
 
 export const fetchRandomQuoteFromAPI = async () => {
   try {
@@ -10,19 +10,26 @@ export const fetchRandomQuoteFromAPI = async () => {
         "Content-Type": "application/json",
       },
     });
+
     if (!response.ok) throw new Error("Error in request");
 
     const data = await response.json();
 
+    if (!Array.isArray(data) || data.length === 0)
+      throw new Error("Unexpected API response format");
+
     // The [] is used because the JSON returns an array of only one element, and it is that element that is needed.
     const [{ quote, author }] = data;
 
-    return {
-      quote: quote,
-      author: author,
-    };
+    if (quote.length <= 180 && quote.length >= 60) {
+      return {
+        quote: quote,
+        author: author,
+      };
+    }
+    return await fetchRandomQuoteFromAPI();
   } catch (error) {
     console.error("An error ocurred: ", error);
-    //todo: Show in the UI the error.
+    return { quote: "No quote available", author: "Unknown" };
   }
 };
