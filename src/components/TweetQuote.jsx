@@ -9,7 +9,8 @@ export function TweetQuote({ quote, author }) {
       href={tweetURL}
       target="_top _blank"
     >
-      <i className="bi bi-twitter-x"></i>
+      Tweet
+      <i className="bi bi-twitter-x ms-2"></i>
     </a>
   );
 }
