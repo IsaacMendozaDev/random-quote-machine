@@ -4,7 +4,7 @@ import useDebouncedCallback from "../hooks/useDebouncedCallback";
 export function NewQuoteButton({ refreshQuoteAndAuthor }) {
   const debouncedRefreshQuoteAndAuthor = useDebouncedCallback(
     refreshQuoteAndAuthor,
-    400
+    800
   );
 
   const handleClick = () => {
