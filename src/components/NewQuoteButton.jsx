@@ -1,7 +1,14 @@
+import useDebouncedCallback from "../hooks/useDebouncedCallback";
+
 // eslint-disable-next-line react/prop-types
 export function NewQuoteButton({ refreshQuoteAndAuthor }) {
+  const debouncedRefreshQuoteAndAuthor = useDebouncedCallback(
+    refreshQuoteAndAuthor,
+    400
+  );
+
   const handleClick = () => {
-    refreshQuoteAndAuthor();
+    debouncedRefreshQuoteAndAuthor();
   };
 
   return (
